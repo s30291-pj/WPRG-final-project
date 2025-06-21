@@ -39,10 +39,30 @@
         <div class="d-flex flex-column align-self-center border border-1 rounded-3 bg-body mt-4 w-100">
             <header class="d-flex justify-content-between p-4 border-bottom bg-light bg-opacity-75 rounded-top-3">
                 <h3 class="p-0 m-0">WSZYSTKIE WPISY</h3>
-                <button class="btn btn-sm btn-outline-primary">
+                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPostmodal">
                     <i class="fa-regular fa-add"></i>
                     DODAJ WPIS
                 </button>
+                
+                <div class="modal fade" id="createPostmodal" tabindex="-1" aria-labelledby="createPostmodal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content" style="width: 600px;">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">DODAJ WPIS</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                        <button type="button" class="btn btn-primary">Dodaj</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </header>
             <div class="d-flex flex-column p-3 gap-3">
                 <div class="d-flex flex-row gap-2">
