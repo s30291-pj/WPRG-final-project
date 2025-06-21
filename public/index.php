@@ -69,13 +69,16 @@ $posts = $stmt->fetchAll();
                     <img src="https://api.dicebear.com/9.x/identicon/svg?seed=<?php echo urlencode($p['username']); ?>" class="bg-body rounded-circle me-1" style="width: 16px;">
                     <?php echo htmlspecialchars($p['username']); ?>
                 </span>
-                <a href="post.php?id=<?php echo $p['id']; ?>" class="link-dark link-underline-opacity-0 link-underline-opacity-75-hover">
-                    <h3 class="mt-2"><?php echo htmlspecialchars($p['title']); ?></h3>
-                </a>
+                
+                <h3 class="text-dark mt-2"><?php echo htmlspecialchars($p['title']); ?></h3>
+
                 <div class="post-content mt-3 w-100">
                     <p id="preview-<?php echo $p['id']; ?>" style="text-align: justify;">
-                        <?php echo nl2br(htmlspecialchars(mb_strimwidth($p['content'], 0, 200, '...'))); ?>
-                        <?php if(mb_strlen($p['content']) > 200): ?>
+                        <?php echo nl2br(htmlspecialchars(strlen($p['content'])>200
+                            ? substr($p['content'],0,200).'...'
+                            : $p['content']
+                        )); ?>
+                        <?php if(strlen($p['content']) > 200): ?>
                             <a href="#" class="link-secondary toggle-content" data-id="<?php echo $p['id']; ?>" data-state="preview">Pokaż więcej...</a>
                         <?php endif; ?>
                     </p>
