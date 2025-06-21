@@ -1,0 +1,38 @@
+
+CREATE TABLE accounts (
+    login VARCHAR(50) PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    role ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
+    password_hash VARCHAR(255) NOT NULL,
+    status ENUM('UNVERIFIED', 'VERIFIED', 'DISABLED') NOT NULL DEFAULT 'UNVERIFIED'
+);
+
+CREATE TABLE users (
+    uuid CHAR(36) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    status ENUM('ACTIVE', 'DEACTIVE') NOT NULL DEFAULT 'ACTIVE',
+    account_login VARCHAR(50),
+    FOREIGN KEY (account_login) REFERENCES accounts(login) ON DELETE SET NULL
+);
+
+CREATE TABLE posts (
+    uuid CHAR(36) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255),
+    content TEXT NOT NULL,
+    user_uuid CHAR(36) NOT NULL,
+    status ENUM('ACTIVE', 'DEACTIVE') NOT NULL DEFAULT 'ACTIVE',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_uuid) REFERENCES users(uuid) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+    uuid CHAR(36) PRIMARY KEY,
+    post_uuid CHAR(36) NOT NULL,
+    user_uuid CHAR(36) NOT NULL,
+    content TEXT NOT NULL,
+    status ENUM('ACTIVE', 'DEACTIVE') NOT NULL DEFAULT 'ACTIVE',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_uuid) REFERENCES posts(uuid) ON DELETE CASCADE,
+    FOREIGN KEY (user_uuid) REFERENCES users(uuid) ON DELETE CASCADE
+);
